@@ -18,46 +18,20 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import ImprativeHandleHook from './app/viewModel/useImprativeHandleHook';
+import UseTransitionHook from './app/viewModel/UseTransitionHook';
 
 
 
-// const App = () => {
+const App = () => {
   
 
-//   return (
-//     <SafeAreaView style={{flex:1}}>
-      
-//     </SafeAreaView>
-//   );
-// };
+  return (
+    <SafeAreaView style={{flex:1}}>
+      <UseTransitionHook />
+    </SafeAreaView>
+  );
+};
 
-class App extends React.PureComponent{
-  render(){
-     return (<SafeAreaView
-     style={{flex:1}}>
-      <Text>Hello Pure Component</Text>
-
-     </SafeAreaView>)
-  }
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
