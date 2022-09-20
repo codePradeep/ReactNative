@@ -1,63 +1,62 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React, {type PropsWithChildren} from 'react';
+import React from 'react';
+import {SafeAreaView, Text, TextInput, View} from 'react-native';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
+const textState = atom({
+  key: 'textState', // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
 
-
-// const App = () => {
-  
-
-//   return (
-//     <SafeAreaView style={{flex:1}}>
-      
-//     </SafeAreaView>
-//   );
-// };
-
-class App extends React.PureComponent{
-  render(){
-     return (<SafeAreaView
-     style={{flex:1}}>
-      <Text>Hello Pure Component</Text>
-
-     </SafeAreaView>)
-  }
+function CharacterCounter() {
+  return (
+    <View>
+      <Input />
+      <CharacterCount />
+    </View>
+  );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+function Input() {
+  const [text, setText] = useRecoilState(textState);
+
+  const onChange = (event:any) => {
+    setText(event);
+  };
+
+  return (
+    <SafeAreaView>
+     <TextInput onChangeText={(event:any)=>onChange(event)} style={{backgroundColor:"lightgray",width:"90%",height:50}} />
+      <Text>{text}</Text>
+    </SafeAreaView>
+  );
+}
+
+const charCountState = selector({
+  key: 'charCountState', // unique ID (with respect to other atoms/selectors)
+  get: ({get}) => {
+    const text = get(textState);
+    return text.length;
   },
 });
+
+function CharacterCount() {
+  const count = useRecoilValue(charCountState);
+  return (<Text>Character Count: {count}</Text>);
+}
+
+
+const App = () => {
+  return (
+    <RecoilRoot>
+      <CharacterCounter />
+    </RecoilRoot>
+  );
+};
 
 export default App;
