@@ -1,11 +1,26 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View } from "react-native";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { textState } from "../recoil/atoms/counter";
+import { charCountState } from "../recoil/selectors/counter";
+import CounterScreen from "../views/CounterScreen/CounterScreen";
 
-const CharacterCounter=()=>{
-    return(
-        <SafeAreaView>
-            
-        </SafeAreaView>
-    )
-}
+function CharacterCounter() {
+
+    const [text, setText] = useRecoilState(textState);
+    
+    const count = useRecoilValue(charCountState);
+    
+    const onChange = (event:any) => {
+      setText(event);
+    };
+    
+    return (
+      <CounterScreen {...{
+        text,
+        onChange,
+        count
+      }} />
+    );
+  }
 export default CharacterCounter
