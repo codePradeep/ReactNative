@@ -28,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+            packages.add(new MyAppPackage());
           return packages;
         }
 
@@ -49,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
     }
   }
 
+
   @Override
   public void onCreate() {
     super.onCreate();
@@ -57,6 +59,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
+
 
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
