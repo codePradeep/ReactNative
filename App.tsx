@@ -1,9 +1,9 @@
 import React from 'react';
-import BridgDemo from './app/viewModel/BridgDemo';
+import PaypalViewModel from './app/viewModel/Paypal';
 
 const App = () => {
   return (
-   <BridgDemo />
+   <PaypalViewModel />
   );
 };
 
